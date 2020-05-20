@@ -74,12 +74,24 @@ var testData = [
 ];
 console.log(testData);
 
-var studentNames = [];
-for (var i=0; i<testData.length; i++) {
-    addName = testData[i].studentName
-     studentNames.push(addName);   
-}
-console.log(studentNames);
+/*
+const namesList= ["Matt", "Jess", "Doug", "John", "Sara", "May", "Charles", "Eric", "Sandy"];
+
+function submitted(list,objects) {
+    const subStudents = [];
+
+        for (var i=0; i<list.length; i++) {
+            if (objects.some(objects => studentName === list[i]))    {
+                console.log(list[i]+" already submitted a test.")
+            }
+            else {
+                subStudents.push(list[i])
+            }
+        };
+    return subStudents;
+};
+console.log(submitted(namesList, testData)); 
+*/
 
 /*------------------------------------------------------------------------------------------------
 Filter By Date Feature (filterByDate)
@@ -132,29 +144,77 @@ an array of names of students that have not completed any quiz on that date
 
 2. Given that the find unsubmitted feature does not find any student names, I am returned an empty array.
 ------------------------------------------------------------------------------------------------*/
-function findUnsubmitted(subDate, objectsArray) {
+
+function findUnsubmitted(subDate, studentList, objectsArray) {
     var unsubStudents = [];
-    for(var i=0; i<objectsArray.length; i++)    {   
-            testSubDate = objectsArray[i].submissionDate;
-            console.log(testSubDate);
-        if (testSubDate === subDate) {
-            unsubStudents.push(objectsArray[i]);
-            }
-    };
-return unsubStudents;
+    for (var i=0; i<objectsArray.length; i++)   {
+        if(studentList.indexOf(objectsArray[i].studentName)== -1) {
+            console.log(objectsArray[i].studentName+" was not found in studentList array");
+
+        };
+        console.log(objectsArray[i].studentName+" was found in object directory.")
+    }
+    return unsubStudents;
 };
-console.log(findUnsubmitted("Monday", [testData]));
+//console.log(findUnsubmitted("Monday", namesList, testData));
+
+
+
+/*function findUnsubmitted(subDate, objectsArray) {
+    var unsubStudents = [];
+    for (var i=0; i<objectsArray.length; i++)   {
+
+        for(var i=0; i<objectsArray.length; i++)    {   
+                testSubDate = objectsArray[i].submissionDate;
+                console.log(testSubDate);
+            if (testSubDate !== subDate) {
+                unsubStudents.push(objectsArray[i].studentName);
+                }
+        };
+    }
+    return unsubStudents;
+};
+console.log(findUnsubmitted("Monday", testData));*/
 
 /*------------------------------------------------------------------------------------------------
 Get Quiz Average Feature (getAverageScore)
-1. Given I have an array of submission objects, when I supply that array to the getAverageScore function, I am returned an average of all the quiz scores.
-2. Given that I have received an average of the quiz scores, it has a precision of one decimal place (example: 76.6)
+1. Given I have an array of submission objects, when I supply that array to the getAverageScore 
+function, I am returned an average of all the quiz scores.
+
+2. Given that I have received an average of the quiz scores, it has a precision of one decimal 
+place (example: 76.6)
+------------------------------------------------------------------------------------------------*/
+function getAverageScore (objectsArr) {
+    const scores = [];
+    var scoreTotal = 0;
+    for(var i=0; i<objectsArr.length; i++)    { 
+        if (testData[i].quizScore!==null) {
+            scores.push(objectsArr[i].quizScore);
+            scoreTotal = scoreTotal+objectsArr[i].quizScore;
+            }
+    };
+    rawAverage = scoreTotal/scores.length;
+    return rawAverage.toFixed(2);
+};
+
+console.log(`The average test score of submitted tests is: `+getAverageScore(testData)); // test functionality //
+
+/*------------------------------------------------------------------------------------------------
 Stretch Goals
+
 Quiz Average by Module Feature (getAverageScoreByModule)
-1. Given I have an array of submission objects, when I supply that array to the getAverageScoreByModule, I am returned an object.
-2. Given that I have received an object from this feature, then there is one key for every unique module name in the submission array, and the keys are the module names.
-3. Given that I have an array of submission objects from only one module, when I use the quiz average by module feature, then the resulting object contains only one key.
-4. When I have received an object from this feature, the value of each key should be the average of quiz scores from that module.
+1. Given I have an array of submission objects, when I supply that array to the getAverageScoreByModule, 
+I am returned an object.
+
+2. Given that I have received an object from this feature, then there is one key for every unique module 
+name in the submission array, and the keys are the module names.
+
+3. Given that I have an array of submission objects from only one module, when I use the quiz average 
+by module feature, then the resulting object contains only one key.
+
+4. When I have received an object from this feature, the value of each key should be the average of 
+quiz scores from that module.
+
 Example:
       {
             Statistics: 83.5,
