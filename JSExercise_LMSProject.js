@@ -1,4 +1,4 @@
-/*
+/*------------------------------------------------------------------------------------------------
 The team is working on building a learning management system. Part of the system allows students
 to take quizzes online and submit them. Information about the student and the quiz are then 
 captured and stored in an object. As submissions come in, those objects are stored in an array.
@@ -20,7 +20,7 @@ Notes:
 it do its job (generally called helper functions), and several feature functions may call the same 
 helper function.
 ● Part of a task like this is to create a set of quality test data to ensure that features work correctly
-*/
+------------------------------------------------------------------------------------------------*/
 
 var testData = [
     {
@@ -30,6 +30,14 @@ var testData = [
         studentId: 1,
         studentName: "Matt",
         submissionDate: "Monday"
+    },
+    {
+        quizName: "Take Home English Quiz",
+        quizModule: "Hawthorne Essay",
+        quizScore: 92,
+        studentId: 1,
+        studentName: "Matt",
+        submissionDate: "Thursday"
     },
     {
         quizName: "Take Home Math Quiz",
@@ -66,15 +74,16 @@ var testData = [
 ];
 console.log(testData);
 
-/*
+/*------------------------------------------------------------------------------------------------
 Filter By Date Feature (filterByDate)
 1. Given I have an array of submission objects, when I call the filterByDate function with a date 
 and the array of submissions, then an array of submission objects with a submissionDate equal to 
 that date are returned to me, so I can see all submissions for a particular date.
 
 2. Given I have supplied a date and an array of submission objects, when the array is empty, or 
-the filter by date feature does not find any results, then I am returned an empty array.
-*/
+the filter by date feature does not find any results, then I am returned an empty array. 
+------------------------------------------------------------------------------------------------*/
+
 function filterByDate (subDate) {
     var dateMatch = [];
         for(var i=0; i<testData.length; i++)    { 
@@ -84,15 +93,31 @@ function filterByDate (subDate) {
     };
     return dateMatch;
 };
-console.log(filterByDate("Monday"));
-// FUNCTION CONDITION 1 SATISFIED ABOVE // 
+console.log(filterByDate("Monday")); // test functionality // 
 
-/*
+
+/*------------------------------------------------------------------------------------------------
 Filter By StudentId Feature (filterByStudentId)
-1. Given I have an array of submission objects, when I supply a studentId and the array to the filterByStudentId function, then submission objects with a studentId equal to the studentId I supplied are returned to me, so I can see all submissions for a particular
-student.
+1. Given I have an array of submission objects, when I supply a studentId and the array to the
+ filterByStudentId function, then submission objects with a studentId equal to the studentId I 
+ supplied are returned to me, so I can see all submissions for a particular student.
+
 2. Given I have supplied a studentId and an array of submission objects, when the array is
 empty, or the filter by studentId feature does not find any results, then I am returned an empty array.
+------------------------------------------------------------------------------------------------*/
+function filterByStudent (inputSID) {
+    var idMatch = [];
+    for(var i=0; i<testData.length; i++)    { 
+        if (testData[i].studentId==inputSID) {
+            idMatch.push(testData[i]);
+            }
+};
+return idMatch;
+};
+console.log(filterByStudent(1)); // test functionality // 
+// FUNCTION CONDITION 2 SATISFIED ABOVE // 
+
+/*------------------------------------------------------------------------------------------------
 Find Unsubmitted Feature (findUnsubmitted)
 1. Given I have an array of submission objects, when I supply a date, an array of student names, and an array of submission objects (in that order) to the findUnsubmitted function, then I am returned an array of names of students that have not completed any quiz on that date
 2. Given that the find unsubmitted feature does not find any student names, I am returned an empty array.
@@ -111,4 +136,4 @@ Example:
             Algebra: 79.6,
             History: 80.1
       }
-*/
+------------------------------------------------------------------------------------------------*/
