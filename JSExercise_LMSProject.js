@@ -74,6 +74,13 @@ var testData = [
 ];
 console.log(testData);
 
+var studentNames = [];
+for (var i=0; i<testData.length; i++) {
+    addName = testData[i].studentName
+     studentNames.push(addName);   
+}
+console.log(studentNames);
+
 /*------------------------------------------------------------------------------------------------
 Filter By Date Feature (filterByDate)
 1. Given I have an array of submission objects, when I call the filterByDate function with a date 
@@ -119,8 +126,26 @@ console.log(filterByStudent(1)); // test functionality //
 
 /*------------------------------------------------------------------------------------------------
 Find Unsubmitted Feature (findUnsubmitted)
-1. Given I have an array of submission objects, when I supply a date, an array of student names, and an array of submission objects (in that order) to the findUnsubmitted function, then I am returned an array of names of students that have not completed any quiz on that date
+1. Given I have an array of submission objects, when I supply a date, an array of student names, 
+and an array of submission objects (in that order) to the findUnsubmitted function, then I am returned 
+an array of names of students that have not completed any quiz on that date
+
 2. Given that the find unsubmitted feature does not find any student names, I am returned an empty array.
+------------------------------------------------------------------------------------------------*/
+function findUnsubmitted(subDate, objectsArray) {
+    var unsubStudents = [];
+    for(var i=0; i<objectsArray.length; i++)    {   
+            testSubDate = objectsArray[i].submissionDate;
+            console.log(testSubDate);
+        if (testSubDate === subDate) {
+            unsubStudents.push(objectsArray[i]);
+            }
+    };
+return unsubStudents;
+};
+console.log(findUnsubmitted("Monday", [testData]));
+
+/*------------------------------------------------------------------------------------------------
 Get Quiz Average Feature (getAverageScore)
 1. Given I have an array of submission objects, when I supply that array to the getAverageScore function, I am returned an average of all the quiz scores.
 2. Given that I have received an average of the quiz scores, it has a precision of one decimal place (example: 76.6)
