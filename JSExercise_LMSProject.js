@@ -27,23 +27,15 @@ var testData = [
         quizName: "Take Home Math Quiz",
         quizModule: "Calculus",
         quizScore: 84,
-        studentId: 1,
+        studentId: 0,
         studentName: "Matt",
         submissionDate: "Monday"
-    },
-    {
-        quizName: "Take Home English Quiz",
-        quizModule: "Hawthorne Essay",
-        quizScore: 92,
-        studentId: 1,
-        studentName: "Matt",
-        submissionDate: "Thursday"
     },
     {
         quizName: "Take Home Math Quiz",
         quizModule: "Calculus",
         quizScore: 93,
-        studentId: 2,
+        studentId: 1,
         studentName: "Jess",
         submissionDate: "Monday"
     },
@@ -51,7 +43,7 @@ var testData = [
         quizName: "Take Home Math Quiz",
         quizModule: "Calculus",
         quizScore: 89,
-        studentId: 3,
+        studentId: 2,
         studentName: "Doug",
         submissionDate: "Tuesday"
     },
@@ -59,7 +51,7 @@ var testData = [
         quizName: "Take Home Math Quiz",
         quizModule: "Calculus",
         quizScore: 81,
-        studentId: 4,
+        studentId: 3,
         studentName: "John",
         submissionDate: "Tuesday"
     },
@@ -67,17 +59,49 @@ var testData = [
         quizName: "Take Home Math Quiz",
         quizModule: "Calculus",
         quizScore: 76,
-        studentId: 5,
+        studentId: 4,
         studentName: "Sara",
+        submissionDate: "Friday"
+    },
+    {
+        quizName: "Take Home Math Quiz",
+        quizModule: "Calculus",
+        quizScore: 76,
+        studentId: 5,
+        studentName: "May",
+        submissionDate: "Tuesday"
+    },
+    {
+        quizName: "Take Home Math Quiz",
+        quizModule: "Calculus",
+        quizScore: 76,
+        studentId: 6,
+        studentName: "Charles",
+        submissionDate: "Thursday"
+    },
+    {
+        quizName: "Take Home Math Quiz",
+        quizModule: "Calculus",
+        quizScore: 76,
+        studentId: 7,
+        studentName: "Eric",
         submissionDate: "Monday"
+    },
+    {
+        quizName: "Take Home Math Quiz",
+        quizModule: "Calculus",
+        quizScore: 76,
+        studentId: 8,
+        studentName: "Sandy",
+        submissionDate: ""
     },
 ];
 console.log("Initialize: printout of testData used in following functions...")
 console.log(testData);
 
-/*
-const namesList= ["Matt", "Jess", "Doug", "John", "Sara", "May", "Charles", "Eric", "Sandy"];
 
+const nameList = ["Matt", "Jess", "Doug", "John", "Sara", "May", "Charles", "Eric", "Sandy"];
+/*
 function submitted(list,objects) {
     const subStudents = [];
 
@@ -149,24 +173,41 @@ an array of names of students that have not completed any quiz on that date
 
 2. Given that the find unsubmitted feature does not find any student names, I am returned an empty array.
 ------------------------------------------------------------------------------------------------*/
+function searchArr (value, array) {
+    var results = [];
+    var prop = array.indexOf(value);
+    while (prop != -1) {
+        results.push(prop);
+        prop = array.indexOf(value, prop+1);
+    }
+    return results;
+};
+// console.log(searchObjArr("Eric", nameList)); // test searchArr function
 
 function findUnsubmitted(subDate, studentList, objectsArray) {
-    var unsubStudents = [];
-    for (var i=0; i<objectsArray.length; i++)   {
-        if(studentList.indexOf(objectsArray[i].studentName)== -1) {
-            console.log(objectsArray[i].studentName+" was not found in studentList array");
+    let unsubStudents = [];
 
-        };
-        console.log(objectsArray[i].studentName+" was found in object directory.")
+    for (var i=0; i<studentList.length; i++)   {
+        studentMatch = objectsArray[i].studentName;
+        //console.log(studentMatch); // see which student is being pulled from obj arr
+        //console.log(searchObjArr(studentMatch, studentList)); // see its position in array, studentList
+
+        if(searchArr(studentMatch, studentList) !== null // i.e. student exists in studentList arr
+            && objectsArray[i].submissionDate !== subDate) // & student submission date != subDate input
+                { 
+                    unsubStudents.push(objectsArray[i].studentName);
+                }
     }
-    return unsubStudents;
+        return unsubStudents;
 };
-//console.log(findUnsubmitted("Monday", namesList, testData));
 
+console.log(`
+Part 3: fundUnsubmitted function...`)
+console.log(findUnsubmitted("Monday", nameList, testData));
 
-
-/*function findUnsubmitted(subDate, objectsArray) {
-    var unsubStudents = [];
+/* << THIS SECTION WORKS >> 
+function findUnsubmitted(subDate, objectsArray) {
+    let unsubStudents = [];
     for (var i=0; i<objectsArray.length; i++)   {
 
         for(var i=0; i<objectsArray.length; i++)    {   
@@ -179,8 +220,10 @@ function findUnsubmitted(subDate, studentList, objectsArray) {
     }
     return unsubStudents;
 };
-console.log(findUnsubmitted("Monday", testData));*/
-
+console.log(`
+Part 4: fundUnsubmitted function...`)
+console.log(findUnsubmitted("Monday", testData));
+*/
 /*------------------------------------------------------------------------------------------------
 Get Quiz Average Feature (getAverageScore)
 1. Given I have an array of submission objects, when I supply that array to the getAverageScore 
