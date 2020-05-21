@@ -253,8 +253,14 @@ Stretch Goals
 
 Quiz Average by Module Feature (getAverageScoreByModule)
 1. Given I have an array of submission objects, when I supply that array to the getAverageScoreByModule, 
-I am returned an object.
+I am returned an object. */
 
+const getAverageScoreByModule = () => {
+
+};
+
+
+/*
 2. Given that I have received an object from this feature, then there is one key for every unique module 
 name in the submission array, and the keys are the module names.
 
