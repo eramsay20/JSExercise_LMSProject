@@ -65,8 +65,8 @@ var testData = [
     },
     {
         quizName: "Take Home Math Quiz",
-        quizModule: "Calculus",
-        quizScore: 76,
+        quizModule: "Linear Algebra",
+        quizScore: 87,
         studentId: 5,
         studentName: "May",
         submissionDate: "Tuesday"
@@ -81,8 +81,8 @@ var testData = [
     },
     {
         quizName: "Take Home Math Quiz",
-        quizModule: "Statistics",
-        quizScore: 76,
+        quizModule: "Linear Algebra",
+        quizScore: 83,
         studentId: 7,
         studentName: "Eric",
         submissionDate: "Monday"
@@ -101,6 +101,8 @@ console.log(testData);
 
 
 const nameList = ["Matt", "Jess", "Doug", "John", "Sara", "May", "Charles", "Eric", "Sandy"];
+const nameList2 = ["Auntie", "Jess", "Ricky",];
+const nameList3 = ["Matt", "Jess", "Donnie", "John", "Sara", "May", "Jeff"];
 /*
 function submitted(list,objects) {
     const subStudents = [];
@@ -189,8 +191,8 @@ function findUnsubmitted(subDate, studentList, objectsArray) {
 
     for (var i=0; i<studentList.length; i++)   {
         studentMatch = objectsArray[i].studentName;
-        // console.log(studentMatch); // see which student is being pulled from obj arr
-        // console.log(searchArr(studentMatch, studentList)); // see its position in array, studentList
+        //console.log(studentMatch); // see which student is being pulled from obj arr
+        //console.log(searchArr(studentMatch, studentList)); // see its position in array, studentList
 
         if(searchArr(studentMatch, studentList) !== null // i.e. student exists in studentList arr
             && objectsArray[i].submissionDate !== subDate) // & student submission date != subDate input
@@ -203,7 +205,14 @@ function findUnsubmitted(subDate, studentList, objectsArray) {
 
 console.log(`
 Part 3: fundUnsubmitted function...`)
-console.log(findUnsubmitted("Monday", nameList, testData));
+console.log(findUnsubmitted("Tuesday", nameList, testData));
+// console.log(findUnsubmitted("Thursday", nameList, testData));
+// console.log(findUnsubmitted("Monday", nameList, testData));
+// console.log(findUnsubmitted("Tuesday", nameList2, testData));
+// console.log(findUnsubmitted("Friday", nameList3, testData));
+
+// console.log(findUnsubmitted("Monday", nameList2, testData));
+// console.log(findUnsubmitted("Monday", nameList, testData));
 
 /* << THIS SECTION WORKS >> 
 function findUnsubmitted(subDate, objectsArray) {
