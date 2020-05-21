@@ -72,6 +72,7 @@ var testData = [
         submissionDate: "Monday"
     },
 ];
+console.log("Initialize: printout of testData used in following functions...")
 console.log(testData);
 
 /*
@@ -112,6 +113,8 @@ function filterByDate (subDate) {
     };
     return dateMatch;
 };
+console.log(`
+Part 1: filterByDate function...`)
 console.log(filterByDate("Monday")); // test functionality // 
 
 
@@ -133,6 +136,8 @@ function filterByStudent (inputSID) {
 };
 return idMatch;
 };
+console.log(`
+Part 2: filterByStudent function...`)
 console.log(filterByStudent(1)); // test functionality // 
 // FUNCTION CONDITION 2 SATISFIED ABOVE // 
 
@@ -196,7 +201,8 @@ function getAverageScore (objectsArr) {
     rawAverage = scoreTotal/scores.length;
     return rawAverage.toFixed(2);
 };
-
+console.log(`
+Part 4: getAverageScore function...`)
 console.log(`The average test score of submitted tests is: `+getAverageScore(testData)); // test functionality //
 
 /*------------------------------------------------------------------------------------------------
