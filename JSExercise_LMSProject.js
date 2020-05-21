@@ -73,7 +73,7 @@ var testData = [
     },
     {
         quizName: "Take Home Math Quiz",
-        quizModule: "Calculus",
+        quizModule: "Statistics",
         quizScore: 76,
         studentId: 6,
         studentName: "Charles",
@@ -81,7 +81,7 @@ var testData = [
     },
     {
         quizName: "Take Home Math Quiz",
-        quizModule: "Calculus",
+        quizModule: "Statistics",
         quizScore: 76,
         studentId: 7,
         studentName: "Eric",
@@ -89,7 +89,7 @@ var testData = [
     },
     {
         quizName: "Take Home Math Quiz",
-        quizModule: "Calculus",
+        quizModule: "Statistics",
         quizScore: 76,
         studentId: 8,
         studentName: "Sandy",
@@ -182,15 +182,15 @@ function searchArr (value, array) {
     }
     return results;
 };
-// console.log(searchObjArr("Eric", nameList)); // test searchArr function
+//console.log(searchArr("Eric", nameList)); // test searchArr function
 
 function findUnsubmitted(subDate, studentList, objectsArray) {
     let unsubStudents = [];
 
     for (var i=0; i<studentList.length; i++)   {
         studentMatch = objectsArray[i].studentName;
-        //console.log(studentMatch); // see which student is being pulled from obj arr
-        //console.log(searchObjArr(studentMatch, studentList)); // see its position in array, studentList
+        // console.log(studentMatch); // see which student is being pulled from obj arr
+        // console.log(searchArr(studentMatch, studentList)); // see its position in array, studentList
 
         if(searchArr(studentMatch, studentList) !== null // i.e. student exists in studentList arr
             && objectsArray[i].submissionDate !== subDate) // & student submission date != subDate input
@@ -253,14 +253,8 @@ Stretch Goals
 
 Quiz Average by Module Feature (getAverageScoreByModule)
 1. Given I have an array of submission objects, when I supply that array to the getAverageScoreByModule, 
-I am returned an object. */
+I am returned an object. 
 
-const getAverageScoreByModule = () => {
-
-};
-
-
-/*
 2. Given that I have received an object from this feature, then there is one key for every unique module 
 name in the submission array, and the keys are the module names.
 
@@ -277,3 +271,61 @@ Example:
             History: 80.1
       }
 ------------------------------------------------------------------------------------------------*/
+// PART 1 --- build function to calculate the module score average for a given module
+/*------------------------------------------------------------------------------------------------*/
+
+const getAverageScoreForModX = (modx, objArr) => {
+    const modxScore = [];
+    var modxScoreTotal = 0;
+    
+    for(var i=0; i<objArr.length; i++)    { 
+        if (objArr[i].quizScore !==null && objArr[i].quizModule === modx) {
+            modxScore.push(objArr[i].quizScore);
+            modxScoreTotal = modxScoreTotal+objArr[i].quizScore;
+            }
+        };
+    rawAverage = modxScoreTotal / modxScore.length;
+    return rawAverage.toFixed(2);
+};
+
+console.log(`
+Part 5: getAverageScoreByModule function...`);
+// console.log(getAverageScoreForModX("Statistics", testData)); // logs... "76.00" ...to console
+
+/*------------------------------------------------------------------------------------------------*/
+// PART 2 --- build function to create an array of unique modules from within the objArr
+/*------------------------------------------------------------------------------------------------*/
+
+const getModules = (objArr) => {
+        modsInData = [];
+
+        for(var i=0; i<objArr.length; i++)    { 
+            let modX = objArr[i].quizModule;
+
+            if(modsInData.indexOf(modX) == -1) {
+                    modsInData.push(objArr[i].quizModule);
+            }
+        };
+        return(modsInData);
+};
+// console.log(getModules(testData)); // test getModules function, logs... ["Calculus", "Statistics"]
+
+/*------------------------------------------------------------------------------------------------*/
+// PART 3 --- build function to satisfy the requirement
+/*------------------------------------------------------------------------------------------------*/
+
+const getAverageScoreByModule = (objArr) => {
+    modScoreObj = {};
+    allMods = getModules(objArr);
+
+        for(var i=0; i<allMods.length; i++)    { 
+            
+            for (var i=0; i<objArr.length; i++)
+                if(allMods[i] !== undefined){
+                modScoreObj[allMods[i]] = getAverageScoreForModX(allMods[i], objArr);
+                }
+            }
+    return modScoreObj;
+};
+
+console.log(getAverageScoreByModule(testData));
